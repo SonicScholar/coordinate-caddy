@@ -1,0 +1,7 @@
+.dmsInput {
+  display: flex;
+  flex: auto 0 1;
+}
+.dmsInput .verticalInputLabelPair {
+  max-width: 80px;
+}

@@ -1,0 +1,11 @@
+.coordinateInfo {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  margin: 5px;
+  color: white;
+}
+
+.coordinateInfo input {
+  max-width: 48.75%;
+}

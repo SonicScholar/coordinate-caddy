@@ -1,0 +1,23 @@
+body {
+  background-color: black;
+}
+.App {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.App h1,
+h2 {
+  text-align: center;
+  color: darkcyan;
+}
+
+/* VerticalInputLabelPair.tsx */
+.verticalInputLabelPair {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 80px;
+  margin: 0 5px 0 0;
+}
+.verticalInputPair:last-child {
+  margin: 0px;
+}
