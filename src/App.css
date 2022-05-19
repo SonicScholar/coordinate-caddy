@@ -1,23 +1,40 @@
 body {
   background-color: black;
 }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .App {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 5%;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+}
+
+.App div {
+  animation: fadeIn 1s;
 }
 
 .App h1,
 h2 {
-  text-align: center;
+  align-self: center;
   color: darkcyan;
 }
 
-/* VerticalInputLabelPair.tsx */
-.verticalInputLabelPair {
+.container {
+  align-self: stretch;
+  justify-self: flex-start;
   display: flex;
-  flex-direction: column;
-  flex: 0 0 80px;
-  margin: 0 5px 0 0;
+  flex-flow: row wrap;
+  justify-content: space-between;
 }
-.verticalInputPair:last-child {
-  margin: 0px;
+.container > div {
+  margin: 10px;
 }

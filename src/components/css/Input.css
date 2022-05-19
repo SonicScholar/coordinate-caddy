@@ -1,0 +1,29 @@
+.input {
+  border: 0.5px solid white;
+  border-radius: 2px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  background-color: whitesmoke;
+  padding: 0px;
+}
+
+.input input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0px;
+}
+
+.input .inputClearButton {
+  font-size: large;
+  font-family: monospace;
+  color: black;
+  min-width: 20px;
+  text-align: center;
+}
+.input .inputClearButton:hover {
+  background-color: lightcoral;
+  cursor: pointer;
+}

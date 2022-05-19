@@ -1,21 +1,33 @@
-import { useState } from "react";
-import "./CoordinateInput.css";
-import {RadialCoordinate} from "../RadialCoordinate";
-import {DDCoordinateInput} from "./DDCoordinateInput";
-import {DMSCoordinateInput} from "./DMSCoordinateInput";
+import { useEffect, useState, useCallback } from "react";
+import "./css/CoordinateInput.css";
+import { RadialCoordinate } from "../RadialCoordinate";
+import { DDCoordinateInput } from "./DDCoordinateInput";
+import { DMSCoordinateInput } from "./DMSCoordinateInput";
 
-
-interface CoordinateInputProps {
-  name: string;
-}
+export type CoordinateInputProps = {
+  label: string;
+  initialValue: number;
+  coordinateChanged?: (value: number) => void;
+};
 
 //COMPONENT
-const defaultState = RadialCoordinate.fromDegreesMinutesSeconds(42, 30, 15);
-function CoordinateInput({ name }: CoordinateInputProps) {
+function CoordinateInput({
+  label: name,
+  initialValue,
+  coordinateChanged,
+}: CoordinateInputProps) {
   //state hook
-  const [decimalDegrees, setCoordinate] = useState<number>(
-    defaultState.getDecimalDegrees()
-  );
+  const [decimalDegrees, setDecimalDegrees] = useState(initialValue);
+  console.log("single coordinate render");
+
+  //hack: even though useCallback is used, the child components
+  //re-render like mad when coordinateChanged is added to the
+  //dep list. The parent components also wrap in useCallback
+  //and still the problem persists...
+  const coordinateChangedCallback = useCallback((value: number) => {
+    if (coordinateChanged) coordinateChanged(value);
+  }, []); //eslint-disable-line react-hooks/exhaustive-deps
+
   //for ease of converting in/out of Deg,Min,Sec.
   const currentCoordinate = new RadialCoordinate(decimalDegrees);
 
@@ -23,7 +35,7 @@ function CoordinateInput({ name }: CoordinateInputProps) {
   const handleDMSChange = ({
     degrees,
     minutes,
-    seconds
+    seconds,
   }: {
     degrees: number;
     minutes: number;
@@ -34,8 +46,13 @@ function CoordinateInput({ name }: CoordinateInputProps) {
       minutes,
       seconds
     ).getDecimalDegrees();
-    setCoordinate(newCoordinate);
+    setDecimalDegrees(newCoordinate);
   };
+
+  useEffect(() => {
+    console.log(`CoordinateInput: (coord changed)`, decimalDegrees);
+    coordinateChangedCallback(decimalDegrees);
+  }, [decimalDegrees, coordinateChangedCallback]);
 
   //render component
   return (
@@ -43,9 +60,8 @@ function CoordinateInput({ name }: CoordinateInputProps) {
       <strong>{name}</strong>
       <DDCoordinateInput
         decimalDegrees={decimalDegrees}
-        onUpdate={(dd) => setCoordinate(dd)}
+        onUpdate={(dd) => setDecimalDegrees(dd)}
       />
-      {/* <StyledInput type='number' /> */}
       <p>or...</p>
       <DMSCoordinateInput
         degrees={currentCoordinate.degrees}

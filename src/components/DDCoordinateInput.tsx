@@ -1,4 +1,4 @@
-import "./DDCoordinateInput.css";
+import "./css/DDCoordinateInput.css";
 import { VerticalInputLabelPair } from "./controls/VerticalInputLabelPair";
 
 type DDCoordinateInputProps = {
@@ -17,7 +17,6 @@ export const DDCoordinateInput = ({
     }
   };
 
-  console.log(`DD input render`);
   return (
     <div className="ddInput">
       <VerticalInputLabelPair

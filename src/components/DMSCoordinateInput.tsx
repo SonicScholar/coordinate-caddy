@@ -1,4 +1,4 @@
-import "./DMSCoordinateInput.css";
+import "./css/DMSCoordinateInput.css";
 import { VerticalInputLabelPair } from "./controls/VerticalInputLabelPair";
 
 export type DMSCoordinateInputProps = {
@@ -22,7 +22,7 @@ export const DMSCoordinateInput = ({
   return (
     <div className="dmsInput">
       <VerticalInputLabelPair
-        label="Degrees"
+        label="Deg."
         value={`${degrees}`}
         inputChanged={(text) => {
           handleUpdate({ ...dms, degrees: Number(text) });
@@ -31,7 +31,7 @@ export const DMSCoordinateInput = ({
       />
 
       <VerticalInputLabelPair
-        label="Minutes"
+        label="Min."
         value={`${minutes}`}
         inputChanged={(text) => {
           handleUpdate({ ...dms, minutes: Number(text) });
@@ -40,7 +40,7 @@ export const DMSCoordinateInput = ({
       />
 
       <VerticalInputLabelPair
-        label="Seconds"
+        label="Sec."
         value={`${Number(seconds.toFixed(5))}`}
         inputChanged={(text) => {
           handleUpdate({ ...dms, seconds: Number(text) });

@@ -1,11 +1,18 @@
 import { Input } from "./controls/Input";
-import "./CoordinateInfo.css"
+import "./css/CoordinateInfo.css";
 
-export const CoordinateInfo = () => {
+export type CoordinateInfoProps = {
+  initialValue?: string;
+  nameChanged: (text: string) => void;
+};
+export const CoordinateInfo = ({
+  initialValue = "",
+  nameChanged,
+}: CoordinateInfoProps) => {
   return (
     <div className="coordinateInfo">
       <strong>Name:</strong>
-      <Input value="" type="text" valueChanged={(v) => {}} />
+      <Input value={initialValue} type="text" valueChanged={nameChanged} />
     </div>
   );
-}
+};

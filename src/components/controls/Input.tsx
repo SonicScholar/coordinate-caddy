@@ -1,3 +1,4 @@
+import "../css/Input.css";
 import React, { useEffect, useState } from "react";
 
 export type InputProps = {
@@ -15,6 +16,7 @@ export const Input = ({ value = "", type, valueChanged }: InputProps) => {
   };
 
   useEffect(() => {
+    console.log(`Input UseEffect. Value changed from outside`, value);
     setInputText(value);
   }, [value]);
 
@@ -22,11 +24,23 @@ export const Input = ({ value = "", type, valueChanged }: InputProps) => {
   const regexPattern = type === "integer" ? /^(?:^\d+$)$/ : /.*/;
 
   return (
-    <input
-      type={inputType}
-      value={inputText}
-      onChange={handleChange}
-      pattern={String(regexPattern)}
-    />
+    <div className="input">
+      <input
+        type={inputType}
+        value={inputText}
+        onChange={handleChange}
+        pattern={String(regexPattern)}
+      />
+      {inputType === "text" && (
+        <div
+          className="inputClearButton"
+          onClick={() => {
+            setInputText("");
+          }}
+        >
+          X
+        </div>
+      )}
+    </div>
   );
 };

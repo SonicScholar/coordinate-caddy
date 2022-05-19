@@ -1,3 +1,4 @@
+import "./VerticalInputLabelPair.css";
 import { Input } from "./Input";
 
 export type VerticalInputLabelPairProps = {

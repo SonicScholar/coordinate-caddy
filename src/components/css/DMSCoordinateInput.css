@@ -1,0 +1,12 @@
+.dmsInput {
+  display: flex;
+  flex: auto 0 1;
+}
+.dmsInput .verticalInputLabelPair:not(:last-child) {
+  max-width: 50px;
+}
+
+.dmsInput .verticalInputLabelPair:last-child {
+  max-width: 75px;
+  margin: 0px;
+}

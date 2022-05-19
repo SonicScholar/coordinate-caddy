@@ -1,0 +1,20 @@
+/* CoordinatesInput.tsx */
+.coordinatePairInput {
+  align-self: flex-start;
+
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  border: 1px dotted turquoise;
+  border-radius: 8px;
+  padding: 6px;
+  /* max-width: 800px; */
+}
+.coordinatesInputContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  flex: 0 1;
+}
+.coordinatePairInput .coordinatesInputButtons {
+  margin-left: 5px;
+}
