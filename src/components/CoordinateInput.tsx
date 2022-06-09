@@ -18,7 +18,6 @@ function CoordinateInput({
 }: CoordinateInputProps) {
   //state hook
   const [decimalDegrees, setDecimalDegrees] = useState(initialValue);
-  console.log("single coordinate render");
 
   //hack: even though useCallback is used, the child components
   //re-render like mad when coordinateChanged is added to the
@@ -50,7 +49,6 @@ function CoordinateInput({
   };
 
   useEffect(() => {
-    console.log(`CoordinateInput: (coord changed)`, decimalDegrees);
     coordinateChangedCallback(decimalDegrees);
   }, [decimalDegrees, coordinateChangedCallback]);
 

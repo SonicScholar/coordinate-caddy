@@ -33,7 +33,6 @@ const CoordinatePairInput = ({
     [coordinates]
   );
 
-  console.log("coordinate pair input rendered", coordinates);
   return (
     <div className="coordinatePairInput">
       <CoordinateInfo

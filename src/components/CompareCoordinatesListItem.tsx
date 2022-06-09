@@ -16,7 +16,6 @@ export const CompareCoordinatesListItem = ({
 
   const { name, latitude, longitude } = coordinates;
 
-  console.log("compare item rendered");
   return (
     <div className={className}>
       <div className="name">{name}</div>

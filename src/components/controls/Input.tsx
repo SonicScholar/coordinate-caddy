@@ -16,7 +16,6 @@ export const Input = ({ value = "", type, valueChanged }: InputProps) => {
   };
 
   useEffect(() => {
-    console.log(`Input UseEffect. Value changed from outside`, value);
     setInputText(value);
   }, [value]);
 

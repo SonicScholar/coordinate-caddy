@@ -8,7 +8,6 @@ export type CompareCoordinatesProps = {
 export const CompareCoordinates = ({
   coordinatesList,
 }: CompareCoordinatesProps) => {
-  console.log("compare coordinates", coordinatesList);
   return (
     <div className="compareCoordinates">
       {coordinatesList.length > 0
