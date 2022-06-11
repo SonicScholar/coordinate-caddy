@@ -12,9 +12,11 @@ const initialCoordinates = new Coordinates(
   "Fort Collins"
 );
 type CoordinatePairInputProps = {
+  initial?: Coordinates;
   coordinatesAdded: (coordinates: Coordinates) => void;
 };
 const CoordinatePairInput = ({
+  initial = initialCoordinates,
   coordinatesAdded,
 }: CoordinatePairInputProps) => {
   //Fort Collins, CO

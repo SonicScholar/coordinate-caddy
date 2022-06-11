@@ -13,7 +13,7 @@ export const CompareCoordinates = ({
       {coordinatesList.length > 0
         ? coordinatesList.map((coordinates) => (
             <CompareCoordinatesListItem
-              key={Math.random()}
+              key={Math.random() * 2}
               coordinates={coordinates}
               isSelected={false}
               compareAgainstCoordinates={0}

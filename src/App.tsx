@@ -1,8 +1,9 @@
 import "./App.css";
-import { useState } from "react";
-import { CoordinatePairInput } from "./components/CoordinatePairInput";
-import { Coordinates } from "./Coordinates";
-import { CompareCoordinates } from "./components/CompareCoordinates";
+import { createContext, useContext, useState } from "react";
+
+import { Nav } from "./components/Nav";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CoordinatesManager } from "./components/CoordinatesManager";
 
 /*
  - Make app to input coordinates in either decimal degrees, or degrees minutes second
@@ -11,19 +12,23 @@ import { CompareCoordinates } from "./components/CompareCoordinates";
 */
 
 export default function App() {
-  const [coordinatesList, setCoordinatesList] = useState<Coordinates[]>([]);
-  const handleCoordinatesAdded = (coordinates: Coordinates) => {
-    setCoordinatesList([...coordinatesList, coordinates]);
-  };
+  //todo
+  const AppContext = createContext({});
 
   return (
-    <div className="App">
-      <h1>Coordinate Caddy</h1>
-      <h2>Edit coordinate information below!</h2>
-      <div className="container">
-        <CoordinatePairInput coordinatesAdded={handleCoordinatesAdded} />
-        <CompareCoordinates coordinatesList={coordinatesList} />
-      </div>
-    </div>
+    <>
+      <BrowserRouter>
+        <Nav />
+        <div className="App">
+          <h1>Coordinate Caddy</h1>
+          <div className="container">
+            <Routes>
+              <Route path="/" element={<CoordinatesManager />} />
+              <Route path="about" element={<h1>ABOUT</h1>} />
+            </Routes>
+          </div>
+        </div>
+      </BrowserRouter>
+    </>
   );
 }
