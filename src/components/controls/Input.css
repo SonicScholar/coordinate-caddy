@@ -13,7 +13,7 @@
   background-color: transparent;
   border: none;
   outline: none;
-  padding: 0px;
+  padding: 0px 5px;
 }
 
 .input .inputClearButton {
@@ -22,8 +22,15 @@
   color: black;
   min-width: 20px;
   text-align: center;
+  border-radius: 1.5px;
+  user-select: none;
 }
 .input .inputClearButton:hover {
   background-color: lightcoral;
+  color: white;
   cursor: pointer;
+}
+.input .inputClearButton:active {
+  background-color: hsl(0, 79%, 60%);
+  color: white;
 }

@@ -15,10 +15,10 @@ body {
   margin: 5%;
   display: flex;
   flex-flow: column;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
-.App div {
+.App > div {
   animation: fadeIn 1s;
 }
 
@@ -28,13 +28,36 @@ h2 {
   color: darkcyan;
 }
 
-.container {
-  align-self: stretch;
-  justify-self: flex-start;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+nav {
+  background-color: white;
 }
-.container > div {
-  margin: 10px;
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+nav a {
+  padding: 10px;
+  font-weight: bolder;
+  text-decoration: unset;
+  color: unset;
+}
+nav a:hover {
+  cursor: pointer;
+  background-color: hsl(0, 0%, 90%);
+}
+
+.container {
+  flex: 1 0;
+  /* align-self: center; */
+  /* justify-self: flex-start; */
+  /* display: flex;
+  flex-flow: row wrap; */
+}
+
+.row {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
 }

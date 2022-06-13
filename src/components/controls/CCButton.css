@@ -1,0 +1,16 @@
+.ccbutton {
+    background-color: darkcyan;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.ccbutton:hover{
+    background-color: hsl(174, 72%, 40%);
+    cursor: pointer;
+    user-select: none;
+}
+
+.ccbutton:active {
+    background-color: hsl(174, 72%, 30%);
+}

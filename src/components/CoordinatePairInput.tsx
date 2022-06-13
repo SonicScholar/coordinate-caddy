@@ -2,61 +2,75 @@ import "./css/CoordinatePairInput.css";
 import { CoordinateInput } from "./CoordinateInput";
 import { CoordinateInfo } from "./CoordinateInfo";
 import { Coordinates } from "../Coordinates";
-import { useCallback, useState } from "react";
+import { useEffect, useState } from "react";
+import { CCButton } from "./controls/CCButton";
 
-const initialCoordinates = new Coordinates(
-  40.5852602,
-  -105.084423,
-  0,
-  0,
-  "Fort Collins"
-);
+// const initialCoordinates = new Coordinates(
+//   40.5852602,
+//   -105.084423,
+//   0,
+//   0,
+//   "Fort Collins"
+// );
+export type CoordinatesEditMode = "Add" | "Update" | "disabled";
 type CoordinatePairInputProps = {
-  coordinatesAdded: (coordinates: Coordinates) => void;
+  initial: Coordinates;
+  editMode: CoordinatesEditMode;
+  coordinatesSaved: (coordinates: Coordinates) => void;
 };
 const CoordinatePairInput = ({
-  coordinatesAdded,
+  initial,
+  editMode,
+  coordinatesSaved: coordinatesAdded,
 }: CoordinatePairInputProps) => {
-  //Fort Collins, CO
-  const [coordinates, setCoordinates] = useState(initialCoordinates);
+  const [coordinates, setCoordinates] = useState(initial);
 
-  const setLatitudeCallback = useCallback(
-    (value: number) => {
-      setCoordinates({ ...coordinates, latitude: value });
-    },
-    [coordinates]
-  );
-  const setLongitudeCallback = useCallback(
-    (value: number) => {
-      setCoordinates({ ...coordinates, longitude: value });
-    },
-    [coordinates]
-  );
+  useEffect(() => {
+    console.log("CoordinatePairInput props changed", initial);
+    setCoordinates(initial);
+  }, [initial]);
 
+  const setLatitudeCallback = (value: number) => {
+    const newValue = { ...coordinates, latitude: value };
+    setCoordinates(newValue);
+  };
+
+  const setLongitudeCallback = (value: number) => {
+    const newValue = { ...coordinates, longitude: value };
+    setCoordinates(newValue);
+  };
+
+  const setNameCallback = (value: string) => {
+    const newValue = { ...coordinates, name: value };
+    setCoordinates(newValue);
+  };
+
+  console.log("CoordinatePairInput.tsx render", coordinates);
   return (
-    <div className="coordinatePairInput">
+    <div className={`coordinatePairInput ${editMode}`}>
       <CoordinateInfo
         initialValue={coordinates.name}
-        nameChanged={(text) => setCoordinates({ ...coordinates, name: text })}
+        nameChanged={setNameCallback}
       />
       <div className="coordinatesInputContainer">
         <CoordinateInput
           label="Latitude:"
-          initialValue={coordinates.latitude}
+          decimalDegreesValue={coordinates.latitude}
           coordinateChanged={setLatitudeCallback}
         />
         <CoordinateInput
           label="Longitude:"
-          initialValue={coordinates.longitude}
+          decimalDegreesValue={coordinates.longitude}
           coordinateChanged={setLongitudeCallback}
         />
       </div>
       <div className="coordinatesInputButtons">
-        <input
-          type="button"
-          value="Add Coordinate"
-          onClick={() => coordinatesAdded(coordinates)}
-        />
+        {editMode !== "disabled" && (
+          <CCButton
+            buttonText={`${editMode} Coordinate`}
+            buttonPressed={() => coordinatesAdded(coordinates)}
+          />
+        )}
       </div>
     </div>
   );
