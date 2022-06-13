@@ -12,7 +12,7 @@ export const CoordinateInfo = ({
   return (
     <div className="coordinateInfo">
       <strong>Name:</strong>
-      <Input value={initialValue} type="text" valueChanged={nameChanged} />
+      <Input value={initialValue} type="text" valueChanged={nameChanged} placeholder="My coordinate..." />
     </div>
   );
 };

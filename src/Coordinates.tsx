@@ -14,7 +14,7 @@ export class Coordinates {
     name: string = ""
   ) {
     //random id from 1 to 1 million... could use uuid
-    this.id = Number((Math.random() * (10 ^ 9)).toFixed(0));
+    this.id = Number((Math.random() * Math.pow(10, 9)).toFixed(0));
     this.latitude = latitude;
     this.longitude = longitude;
     this.Z = Z;

@@ -55,3 +55,9 @@ nav a:hover {
   /* display: flex;
   flex-flow: row wrap; */
 }
+
+.row {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}

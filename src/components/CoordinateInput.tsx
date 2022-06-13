@@ -23,9 +23,17 @@ function CoordinateInput({
   //re-render like mad when coordinateChanged is added to the
   //dep list. The parent components also wrap in useCallback
   //and still the problem persists...
-  const coordinateChangedCallback = useCallback((value: number) => {
-    if (coordinateChanged) coordinateChanged(value);
-  }, []); //eslint-disable-line react-hooks/exhaustive-deps
+  const coordinateChangedCallback = useCallback(
+    (value: number) => {
+      console.log("coordinate changed", value);
+      if (coordinateChanged) coordinateChanged(value);
+    },
+    [coordinateChanged]
+  );
+
+  // const coordinateChangedCallback = (value: number) => {
+  //   if (coordinateChanged) coordinateChanged(value);
+  // }; //eslint-disable-line react-hooks/exhaustive-deps
 
   //for ease of converting in/out of Deg,Min,Sec.
   const currentCoordinate = new RadialCoordinate(decimalDegrees);

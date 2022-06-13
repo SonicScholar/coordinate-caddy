@@ -2,44 +2,58 @@ import "./css/CoordinatePairInput.css";
 import { CoordinateInput } from "./CoordinateInput";
 import { CoordinateInfo } from "./CoordinateInfo";
 import { Coordinates } from "../Coordinates";
-import { useCallback, useState } from "react";
+import { useEffect, useState } from "react";
+import { CCButton } from "./controls/CCButton";
 
-const initialCoordinates = new Coordinates(
-  40.5852602,
-  -105.084423,
-  0,
-  0,
-  "Fort Collins"
-);
+// const initialCoordinates = new Coordinates(
+//   40.5852602,
+//   -105.084423,
+//   0,
+//   0,
+//   "Fort Collins"
+// );
+export type CoordinatesEditMode = "Add" | "Update" | "disabled";
 type CoordinatePairInputProps = {
-  initial?: Coordinates;
-  coordinatesAdded: (coordinates: Coordinates) => void;
+  initial: Coordinates;
+  editMode: CoordinatesEditMode;
+  coordinatesSaved: (coordinates: Coordinates) => void;
 };
 const CoordinatePairInput = ({
-  initial = initialCoordinates,
-  coordinatesAdded,
+  initial,
+  editMode,
+  coordinatesSaved: coordinatesAdded,
 }: CoordinatePairInputProps) => {
   //Fort Collins, CO
-  const [coordinates, setCoordinates] = useState(initialCoordinates);
+  const [coordinates, setCoordinates] = useState(initial);
 
-  const setLatitudeCallback = useCallback(
-    (value: number) => {
-      setCoordinates({ ...coordinates, latitude: value });
-    },
-    [coordinates]
-  );
-  const setLongitudeCallback = useCallback(
-    (value: number) => {
-      setCoordinates({ ...coordinates, longitude: value });
-    },
-    [coordinates]
-  );
+  useEffect(() => {
+    console.log("coordinate props changed", initial);
+    setCoordinates(initial);
+  }, [initial]);
+
+  const setLatitudeCallback = (value: number) => {
+    const newValue = { ...coordinates, latitude: value };
+    console.log("latitude changed", newValue);
+    setCoordinates(newValue);
+  };
+
+  const setLongitudeCallback = (value: number) => {
+    const newValue = { ...coordinates, longitude: value };
+    console.log("longitude changed", newValue);
+    setCoordinates(newValue);
+  };
+
+  const setNameCallback = (value: string) => {
+    const newValue = { ...coordinates, name: value };
+    console.log("name changed", value, newValue);
+    setCoordinates(newValue);
+  };
 
   return (
-    <div className="coordinatePairInput">
+    <div className={`coordinatePairInput ${editMode}`}>
       <CoordinateInfo
         initialValue={coordinates.name}
-        nameChanged={(text) => setCoordinates({ ...coordinates, name: text })}
+        nameChanged={setNameCallback}
       />
       <div className="coordinatesInputContainer">
         <CoordinateInput
@@ -54,11 +68,19 @@ const CoordinatePairInput = ({
         />
       </div>
       <div className="coordinatesInputButtons">
-        <input
-          type="button"
-          value="Add Coordinate"
-          onClick={() => coordinatesAdded(coordinates)}
-        />
+        {
+          editMode !== "disabled" && (
+            <CCButton
+              buttonText={`${editMode} Coordinate`}
+              buttonPressed={() => coordinatesAdded(coordinates)}
+            />
+          )
+          //   <input
+          //   type="button"
+          //   value=
+          //   onClick={() => coordinatesAdded(coordinates)}
+          //   />
+        }
       </div>
     </div>
   );

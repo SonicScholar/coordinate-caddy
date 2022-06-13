@@ -1,6 +1,5 @@
 // import "./VerticalInputLabelPair.css";
 import { Input } from "./Input";
-import { Style } from "util";
 
 export type VerticalInputLabelPairProps = {
   label: string;
