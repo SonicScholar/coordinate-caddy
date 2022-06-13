@@ -23,32 +23,29 @@ const CoordinatePairInput = ({
   editMode,
   coordinatesSaved: coordinatesAdded,
 }: CoordinatePairInputProps) => {
-  //Fort Collins, CO
   const [coordinates, setCoordinates] = useState(initial);
 
   useEffect(() => {
-    console.log("coordinate props changed", initial);
+    console.log("CoordinatePairInput props changed", initial);
     setCoordinates(initial);
   }, [initial]);
 
   const setLatitudeCallback = (value: number) => {
     const newValue = { ...coordinates, latitude: value };
-    console.log("latitude changed", newValue);
     setCoordinates(newValue);
   };
 
   const setLongitudeCallback = (value: number) => {
     const newValue = { ...coordinates, longitude: value };
-    console.log("longitude changed", newValue);
     setCoordinates(newValue);
   };
 
   const setNameCallback = (value: string) => {
     const newValue = { ...coordinates, name: value };
-    console.log("name changed", value, newValue);
     setCoordinates(newValue);
   };
 
+  console.log("CoordinatePairInput.tsx render", coordinates);
   return (
     <div className={`coordinatePairInput ${editMode}`}>
       <CoordinateInfo
@@ -58,29 +55,22 @@ const CoordinatePairInput = ({
       <div className="coordinatesInputContainer">
         <CoordinateInput
           label="Latitude:"
-          initialValue={coordinates.latitude}
+          decimalDegreesValue={coordinates.latitude}
           coordinateChanged={setLatitudeCallback}
         />
         <CoordinateInput
           label="Longitude:"
-          initialValue={coordinates.longitude}
+          decimalDegreesValue={coordinates.longitude}
           coordinateChanged={setLongitudeCallback}
         />
       </div>
       <div className="coordinatesInputButtons">
-        {
-          editMode !== "disabled" && (
-            <CCButton
-              buttonText={`${editMode} Coordinate`}
-              buttonPressed={() => coordinatesAdded(coordinates)}
-            />
-          )
-          //   <input
-          //   type="button"
-          //   value=
-          //   onClick={() => coordinatesAdded(coordinates)}
-          //   />
-        }
+        {editMode !== "disabled" && (
+          <CCButton
+            buttonText={`${editMode} Coordinate`}
+            buttonPressed={() => coordinatesAdded(coordinates)}
+          />
+        )}
       </div>
     </div>
   );

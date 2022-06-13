@@ -18,13 +18,11 @@ export const Input = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    console.log("input changed:", newValue);
     setInputText(newValue);
-    valueChanged?.call(this, newValue);
+    if (valueChanged) valueChanged(newValue);
   };
 
   useEffect(() => {
-    console.log("input value props changed", value);
     setInputText(value);
   }, [value]);
 
