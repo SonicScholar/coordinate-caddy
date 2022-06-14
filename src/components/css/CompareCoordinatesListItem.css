@@ -16,3 +16,7 @@
 .compareCoordinatesListItem div {
   padding: 0px 20px;
 }
+
+.compareCoordinatesListItem.itemSelected{
+  background-color: rgba(64, 224, 208, 0.3);
+}
