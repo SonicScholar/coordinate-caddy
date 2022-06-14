@@ -21,12 +21,12 @@ type CoordinatePairInputProps = {
 const CoordinatePairInput = ({
   initial,
   editMode,
-  coordinatesSaved: coordinatesAdded,
+  coordinatesSaved,
 }: CoordinatePairInputProps) => {
   const [coordinates, setCoordinates] = useState(initial);
+  const [formValid, setFormValid] = useState(true);
 
   useEffect(() => {
-    console.log("CoordinatePairInput props changed", initial);
     setCoordinates(initial);
   }, [initial]);
 
@@ -45,7 +45,16 @@ const CoordinatePairInput = ({
     setCoordinates(newValue);
   };
 
-  console.log("CoordinatePairInput.tsx render", coordinates);
+  const handleCoordinatesUpdated = () => {
+    //validation for the form
+    const isValid = coordinates.name !== "" && coordinates.name.length > 0;
+    setFormValid(isValid);
+    if (!isValid) {
+      return;
+    }
+    coordinatesSaved(coordinates);
+  };
+
   return (
     <div className={`coordinatePairInput ${editMode}`}>
       <CoordinateInfo
@@ -64,11 +73,16 @@ const CoordinatePairInput = ({
           coordinateChanged={setLongitudeCallback}
         />
       </div>
+      {!formValid && (
+        <div className="validationError">
+          Please enter a name for these coordinates!
+        </div>
+      )}
       <div className="coordinatesInputButtons">
         {editMode !== "disabled" && (
           <CCButton
             buttonText={`${editMode} Coordinate`}
-            buttonPressed={() => coordinatesAdded(coordinates)}
+            buttonPressed={handleCoordinatesUpdated}
           />
         )}
       </div>

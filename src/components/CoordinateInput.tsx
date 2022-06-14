@@ -22,11 +22,7 @@ function CoordinateInput({
   //allow updates to the props from the outside to
   //change the state inside
   useEffect(() => {
-    console.log(
-      "CoordinateInput.tsx decimalDegrees props changed",
-      decimalDegreesValue
-    );
-    setDecimalDegrees(decimalDegrees);
+    setDecimalDegrees(decimalDegreesValue);
   }, [decimalDegreesValue]);
 
   const handleDMSChange = (
