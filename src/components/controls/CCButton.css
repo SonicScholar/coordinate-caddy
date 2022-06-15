@@ -1,8 +1,10 @@
 .ccbutton {
     background-color: darkcyan;
     color: white;
-    padding: 5px;
+    padding: 3px !important;
     border-radius: 3px;
+    text-align: center;
+    text-justify: center;
 }
 
 .ccbutton:hover{

@@ -81,7 +81,7 @@ const CoordinatePairInput = ({
       <div className="coordinatesInputButtons">
         {editMode !== "disabled" && (
           <CCButton
-            buttonText={`${editMode} Coordinate`}
+            buttonContent={`${editMode} Coordinate`}
             buttonPressed={handleCoordinatesUpdated}
           />
         )}

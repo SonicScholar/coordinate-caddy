@@ -1,0 +1,26 @@
+.coordinatesListItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.coordinatesListItem:hover {
+  background-color: rgba(64, 224, 208, 0.2);
+  cursor: pointer;
+}
+
+.coordinatesListItem:not(:last-child) {
+  border-bottom: 0.5px dashed turquoise;
+}
+
+.coordinatesListItem div {
+  padding: 0px 20px;
+}
+
+.coordinatesListItem.itemSelected{
+  background-color: rgba(64, 224, 208, 0.3);
+}
+
+.coordinatesListItem .coordinatesItemAction{
+  flex: 0 1 30px;
+}

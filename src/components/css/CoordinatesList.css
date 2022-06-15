@@ -1,0 +1,28 @@
+.coordinatesList {
+  flex: 0.5 1 auto;
+
+  color: white;
+  border: 1px dotted turquoise;
+  border-radius: 5px;
+  
+}
+
+.coordinatesList .helpText {
+  font-style: italic;
+}
+
+.coordinatesListHeader {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 6px;
+}
+
+.coordinatesList .actionButtons{
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.coordinatesList .actionButtons .ccbutton:not(:last-child){
+  margin-right: 6px;
+}

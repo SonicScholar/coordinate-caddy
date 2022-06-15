@@ -1,7 +1,7 @@
 import "./css/CoordinatesManager.css";
 import { useState } from "react";
 import { Coordinates } from "../Coordinates";
-import { CompareCoordinates } from "./CompareCoordinates";
+import { CoordinatesList } from "./CoordinatesList";
 import {
   CoordinatePairInput,
   CoordinatesEditMode,
@@ -15,8 +15,6 @@ const defaultCoordinates = (() => {
 })();
 
 export const CoordinatesManager = () => {
-  const [addCoordinateButtonEnabled, setAddCoordinateButtonEnabled] =
-    useState(true);
   const [coordinatesToEdit, setCoordinatesToEdit] =
     useState<Coordinates>(defaultCoordinates);
   const [coordinatesList, setCoordinatesList] = useState<Coordinates[]>([]);
@@ -33,17 +31,23 @@ export const CoordinatesManager = () => {
       newCoordinatesList.push(coordinates);
       setEditMode("disabled");
       setCoordinatesToEdit(new Coordinates(0, 0, 0, 0, ""));
-      setAddCoordinateButtonEnabled(true);
     }
 
-    setCoordinatesList([...coordinatesList, coordinates]);
+    setCoordinatesList(newCoordinatesList);
   };
 
-  const handleAddNewCoordinate = () => {
-    const newCoordinate = new Coordinates(0, 0, 0, 0, "");
-    setCoordinatesToEdit(newCoordinate);
-    setAddCoordinateButtonEnabled(false);
+  const handleCoordinatesAdded = (coordinates: Coordinates) => {
+    setCoordinatesToEdit(coordinates);
     setEditMode("Add");
+  };
+
+  const handleCoordinatesSelected = (coordinates: Coordinates | null) => {
+    if (coordinates !== null) {
+      setCoordinatesToEdit(coordinates);
+      setEditMode("Update");
+    } else {
+      setEditMode("disabled");
+    }
   };
 
   return (
@@ -51,14 +55,19 @@ export const CoordinatesManager = () => {
       <h2>Manage coordinates below!</h2>
 
       <div>
+        <CoordinatesList
+          coordinatesList={coordinatesList}
+          coordinatesSelected={handleCoordinatesSelected}
+          coordinatesAdded={handleCoordinatesAdded}
+        />
         <div className="item1">
           <div className="row">
-            {addCoordinateButtonEnabled && (
+            {/* {addCoordinateButtonEnabled && (
               <CCButton
-                buttonText="Add New Coordinate"
+                buttonContent="Add New Coordinate"
                 buttonPressed={handleAddNewCoordinate}
               />
-            )}
+            )} */}
           </div>
           <CoordinatePairInput
             initial={coordinatesToEdit}
@@ -66,7 +75,6 @@ export const CoordinatesManager = () => {
             coordinatesSaved={handleCoordinatesSaved}
           />
         </div>
-        <CompareCoordinates coordinatesList={coordinatesList} />
       </div>
     </div>
   );
