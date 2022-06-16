@@ -1,7 +1,7 @@
 import React from "react";
 import "./CCButton.css";
 type CCButtonProps = {
-  buttonContent: string;
+  buttonContent: any;
   enabled?: boolean;
   buttonPressed: (e: React.MouseEvent) => void;
   className?: string;

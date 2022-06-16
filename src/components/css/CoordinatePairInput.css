@@ -5,23 +5,29 @@
   display: flex;
   flex-flow: column;
   align-items: flex-start;
-  border: 1px dotted turquoise;
+  border: 1px solid turquoise;
   border-radius: 8px;
   padding: 6px;
-  /* max-width: 800px; */
 }
-.coordinatePairInput.disabled{
-  filter: blur(5px);
-  opacity: .5;
+.coordinatePairInput.disabled {
+  filter: blur(3px);
+  border-width: 2px;
+  opacity: 0.5;
   pointer-events: none;
   user-select: none;
 }
 
 .coordinatesInputContainer {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   flex: 0 1;
 }
 .coordinatePairInput .coordinatesInputButtons {
+  display: flex;
+  flex-flow: row nowrap;
   margin-left: 5px;
+}
+
+.coordinatePairInput .coordinatesInputButtons .ccbutton:not(:last-child) {
+  margin-right: 5px;
 }

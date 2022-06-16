@@ -1,4 +1,6 @@
 import "./css/CoordinatesListItem.css";
+import * as Icon from "react-bootstrap-icons";
+import { iconSize } from "../App";
 import { Coordinates } from "../Coordinates";
 import React, { useState } from "react";
 import { CCButton } from "./controls/CCButton";
@@ -50,16 +52,23 @@ export const CoordinatesListItem = ({
     >
       <div className="name">{name}</div>
       <div className="latlon">
-        <div className="lat">{latitude}</div>
-        <div className="lon">{longitude}</div>
+        <div className="lat">{Number(latitude.toFixed(8))}</div>
+        <div className="lon">{Number(longitude.toFixed(8))}</div>
       </div>
       <div className="coordinatesItemAction">
         {isHovered && (
-          <CCButton
-            buttonContent={deleteIcon}
-            enabled={true}
-            buttonPressed={handleDelete}
-          />
+          <>
+            <CCButton
+              buttonContent={<Icon.Clipboard2Plus size={iconSize} />}
+              enabled={true}
+              buttonPressed={() => {}}
+            />
+            <CCButton
+              buttonContent={<Icon.XLg size={iconSize} />}
+              enabled={true}
+              buttonPressed={handleDelete}
+            />
+          </>
         )}
       </div>
     </div>

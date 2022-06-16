@@ -10,6 +10,7 @@ import { CoordinatesManager } from "./components/CoordinatesManager";
  - Coordinates can be added to a list that can be deleted
 
 */
+export const iconSize = "1.5em";
 
 export default function App() {
   //todo

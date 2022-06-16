@@ -1,18 +1,21 @@
 .ccbutton {
-    background-color: darkcyan;
-    color: white;
-    padding: 3px !important;
-    border-radius: 3px;
-    text-align: center;
-    text-justify: center;
+  background-color: darkcyan;
+  color: white;
+  padding: 3px !important;
+  border-radius: 3px;
+  text-align: center;
+  text-justify: center;
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
 
-.ccbutton:hover{
-    background-color: hsl(174, 72%, 40%);
-    cursor: pointer;
-    user-select: none;
+.ccbutton:hover {
+  background-color: hsl(174, 72%, 40%);
+  cursor: pointer;
+  user-select: none;
 }
 
 .ccbutton:active {
-    background-color: hsl(174, 72%, 30%);
+  background-color: hsl(174, 72%, 15%);
 }

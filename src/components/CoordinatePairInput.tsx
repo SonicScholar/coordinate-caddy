@@ -4,6 +4,8 @@ import { CoordinateInfo } from "./CoordinateInfo";
 import { Coordinates } from "../Coordinates";
 import { useEffect, useState } from "react";
 import { CCButton } from "./controls/CCButton";
+import * as Icon from "react-bootstrap-icons";
+import { iconSize } from "../App";
 
 // const initialCoordinates = new Coordinates(
 //   40.5852602,
@@ -80,10 +82,16 @@ const CoordinatePairInput = ({
       )}
       <div className="coordinatesInputButtons">
         {editMode !== "disabled" && (
-          <CCButton
-            buttonContent={`${editMode} Coordinate`}
-            buttonPressed={handleCoordinatesUpdated}
-          />
+          <>
+            <CCButton
+              buttonContent={<Icon.XLg size={iconSize} />}
+              buttonPressed={handleCoordinatesUpdated}
+            />
+            <CCButton
+              buttonContent={<Icon.CheckLg size={iconSize} />}
+              buttonPressed={handleCoordinatesUpdated}
+            />
+          </>
         )}
       </div>
     </div>

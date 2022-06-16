@@ -56,7 +56,7 @@ function CoordinateInput({
         decimalDegrees={decimalDegrees}
         onUpdate={handleDDChange}
       />
-      <p>or...</p>
+      <i>or...</i>
       <DMSCoordinateInput
         degrees={currentCoordinate.degrees}
         minutes={currentCoordinate.minutes}

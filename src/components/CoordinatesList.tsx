@@ -1,4 +1,6 @@
 import "./css/CoordinatesList.css";
+import * as Icon from "react-bootstrap-icons";
+import { iconSize } from "../App";
 import { Coordinates } from "../Coordinates";
 import { CoordinatesListItem } from "./CoordinatesListItem";
 import { useState } from "react";
@@ -66,9 +68,18 @@ export const CoordinatesList = ({
             : "Add some coordinates"}
         </div>
         <div className="actionButtons">
-          <CCButton buttonContent="Add" buttonPressed={handleItemAdded} />
-          <CCButton buttonContent="Save" buttonPressed={() => {}} />
-          <CCButton buttonContent="Clear" buttonPressed={() => {}} />
+          <CCButton
+            buttonContent={<Icon.PlusLg size={iconSize} />}
+            buttonPressed={handleItemAdded}
+          />
+          <CCButton
+            buttonContent={<Icon.Save2 size={iconSize} />}
+            buttonPressed={() => {}}
+          />
+          <CCButton
+            buttonContent={<Icon.Trash size={iconSize} />}
+            buttonPressed={() => {}}
+          />
         </div>
       </div>
 

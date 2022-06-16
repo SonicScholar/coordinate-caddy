@@ -16,3 +16,7 @@
   margin: 0 0 10px 0;
   text-decoration: underline;
 }
+
+.coordinateInput i {
+  padding-bottom: 6px;
+}

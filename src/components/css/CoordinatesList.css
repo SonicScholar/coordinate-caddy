@@ -2,7 +2,7 @@
   flex: 0.5 2 auto;
 
   color: white;
-  border: 1px dotted turquoise;
+  border: 1px solid turquoise;
   border-radius: 5px;
 }
 
@@ -15,11 +15,13 @@
   flex-flow: row nowrap;
   justify-content: space-between;
   padding: 6px;
+  border-bottom: 0.25px solid turquoise;
 }
 
 .coordinatesList .actionButtons {
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
 }
 
 .coordinatesList .actionButtons .ccbutton:not(:last-child) {
