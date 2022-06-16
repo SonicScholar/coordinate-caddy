@@ -38,7 +38,8 @@ export const CoordinatesManager = () => {
 
   const handleCoordinatesAdded = (coordinates: Coordinates) => {
     setCoordinatesToEdit(coordinates);
-    setEditMode("Add");
+    setCoordinatesList([...coordinatesList, coordinates]);
+    setEditMode("Update");
   };
 
   const handleCoordinatesSelected = (coordinates: Coordinates | null) => {

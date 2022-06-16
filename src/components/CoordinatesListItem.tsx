@@ -38,7 +38,9 @@ export const CoordinatesListItem = ({
     if (itemDeleted) itemDeleted(coordinates);
   };
 
-  const selectedOrHovered = isSelected || isHovered;
+  let deleteIcon = String.fromCharCode(0x00d7);
+  deleteIcon = String.fromCharCode(0x1f5ce);
+
   return (
     <div
       className={className}
@@ -54,7 +56,7 @@ export const CoordinatesListItem = ({
       <div className="coordinatesItemAction">
         {isHovered && (
           <CCButton
-            buttonContent="X"
+            buttonContent={deleteIcon}
             enabled={true}
             buttonPressed={handleDelete}
           />

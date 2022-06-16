@@ -1,7 +1,14 @@
 .coordinatesListItem {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 10px 20px;
+}
+
+.coordinatesListItem > div:first-child {
+  justify-self: flex-start;
+  flex: 1 4;
+  /* align-self: flex-start; */
+  /* background-color: pink; */
 }
 
 .coordinatesListItem:hover {
@@ -17,10 +24,14 @@
   padding: 0px 20px;
 }
 
-.coordinatesListItem.itemSelected{
+.coordinatesListItem.itemSelected {
   background-color: rgba(64, 224, 208, 0.3);
 }
 
-.coordinatesListItem .coordinatesItemAction{
+.coordinatesListItem .coordinatesItemAction {
   flex: 0 1 30px;
+}
+
+.coordinatesListItem .ccButton {
+  font-family: symbol;
 }

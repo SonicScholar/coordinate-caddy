@@ -1,10 +1,9 @@
 .coordinatesList {
-  flex: 0.5 1 auto;
+  flex: 0.5 2 auto;
 
   color: white;
   border: 1px dotted turquoise;
   border-radius: 5px;
-  
 }
 
 .coordinatesList .helpText {
@@ -18,11 +17,11 @@
   padding: 6px;
 }
 
-.coordinatesList .actionButtons{
+.coordinatesList .actionButtons {
   display: flex;
   flex-flow: row nowrap;
 }
 
-.coordinatesList .actionButtons .ccbutton:not(:last-child){
+.coordinatesList .actionButtons .ccbutton:not(:last-child) {
   margin-right: 6px;
 }
