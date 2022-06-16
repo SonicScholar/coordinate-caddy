@@ -16,62 +16,72 @@ import { iconSize } from "../App";
 // );
 export type CoordinatesEditMode = "Add" | "Update" | "disabled";
 type CoordinatePairInputProps = {
-  initial: Coordinates;
+  coordinates: Coordinates | null;
   editMode: CoordinatesEditMode;
   coordinatesSaved: (coordinates: Coordinates) => void;
 };
 const CoordinatePairInput = ({
-  initial,
+  coordinates,
   editMode,
   coordinatesSaved,
 }: CoordinatePairInputProps) => {
-  const [coordinates, setCoordinates] = useState(initial);
+  const [internalCoordinates, setInternalCoordinates] = useState(coordinates);
+  useEffect(() => {
+    setInternalCoordinates(coordinates);
+  }, [coordinates]);
+
   const [formValid, setFormValid] = useState(true);
 
-  useEffect(() => {
-    setCoordinates(initial);
-  }, [initial]);
-
   const setLatitudeCallback = (value: number) => {
-    const newValue = { ...coordinates, latitude: value };
-    setCoordinates(newValue);
+    if (!internalCoordinates) return;
+    const newValue = { ...internalCoordinates, latitude: value };
+    setInternalCoordinates(newValue);
   };
 
   const setLongitudeCallback = (value: number) => {
-    const newValue = { ...coordinates, longitude: value };
-    setCoordinates(newValue);
+    if (!internalCoordinates) return;
+    const newValue = { ...internalCoordinates, longitude: value };
+    setInternalCoordinates(newValue);
   };
 
   const setNameCallback = (value: string) => {
-    const newValue = { ...coordinates, name: value };
-    setCoordinates(newValue);
+    if (!internalCoordinates) return;
+    const newValue = { ...internalCoordinates, name: value };
+    setInternalCoordinates(newValue);
   };
 
   const handleCoordinatesUpdated = () => {
     //validation for the form
-    const isValid = coordinates.name !== "" && coordinates.name.length > 0;
+    const isValid =
+      coordinates !== null &&
+      coordinates.name !== "" &&
+      coordinates?.name.length > 0;
     setFormValid(isValid);
     if (!isValid) {
       return;
     }
-    coordinatesSaved(coordinates);
+    if (internalCoordinates) coordinatesSaved(internalCoordinates);
   };
 
   return (
     <div className={`coordinatePairInput ${editMode}`}>
       <CoordinateInfo
-        initialValue={coordinates.name}
+        initialValue={internalCoordinates?.name}
         nameChanged={setNameCallback}
       />
       <div className="coordinatesInputContainer">
         <CoordinateInput
           label="Latitude:"
-          decimalDegreesValue={coordinates.latitude}
+          decimalDegreesValue={
+            internalCoordinates ? internalCoordinates.latitude : 0
+          }
           coordinateChanged={setLatitudeCallback}
         />
         <CoordinateInput
           label="Longitude:"
-          decimalDegreesValue={coordinates.longitude}
+          decimalDegreesValue={
+            internalCoordinates ? internalCoordinates.longitude : 0
+          }
           coordinateChanged={setLongitudeCallback}
         />
       </div>

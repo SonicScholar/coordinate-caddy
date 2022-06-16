@@ -1,5 +1,6 @@
 import "./App.css";
-import { createContext, useContext, useState } from "react";
+import { createContext } from "react";
+import * as Icon from "react-bootstrap-icons";
 
 import { Nav } from "./components/Nav";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -21,7 +22,11 @@ export default function App() {
       <BrowserRouter>
         <Nav />
         <div className="App">
-          <h1>Coordinate Caddy</h1>
+          <h1>
+            <Icon.GeoAltFill />
+            &nbsp;Coordinate Caddy&nbsp;
+            <Icon.Globe2 />
+          </h1>
           <div className="container">
             <Routes>
               <Route path="/" element={<CoordinatesManager />} />

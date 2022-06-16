@@ -3,28 +3,26 @@ import * as Icon from "react-bootstrap-icons";
 import { iconSize } from "../App";
 import { Coordinates } from "../Coordinates";
 import { CoordinatesListItem } from "./CoordinatesListItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CCButton } from "./controls/CCButton";
 
 export type CoordinatesListProps = {
   coordinatesList: Coordinates[];
+  selectedItem: Coordinates | null;
   coordinatesAdded?: (coordinates: Coordinates) => void;
   coordinatesSelected?: (coordinates: Coordinates | null) => void;
   coordinatesDeleted?: (coordinates: Coordinates) => void;
 };
 export const CoordinatesList = ({
   coordinatesList,
+  selectedItem,
   coordinatesAdded,
   coordinatesSelected,
   coordinatesDeleted,
 }: CoordinatesListProps) => {
-  const [selectedItemId, setSelectedItemId] = useState(-1);
-
   // all calls to change selectedItemId state should be in here
   const changeCoordinatesSelection = (coordinates: Coordinates | null) => {
     if (coordinatesSelected) coordinatesSelected(coordinates);
-    const id = coordinates === null ? -1 : coordinates.id;
-    setSelectedItemId(id);
   };
 
   //
@@ -43,7 +41,7 @@ export const CoordinatesList = ({
   const handleItemSelected = (coordinates: Coordinates) => {
     const { id } = coordinates;
     //deselect if on the currently selected
-    if (selectedItemId === id) {
+    if (selectedItem?.id === id) {
       changeCoordinatesSelection(null);
       return;
     }
@@ -88,7 +86,7 @@ export const CoordinatesList = ({
           <CoordinatesListItem
             key={coordinates.id}
             coordinates={coordinates}
-            isSelected={coordinates.id === selectedItemId}
+            isSelected={coordinates.id === selectedItem?.id}
             compareAgainstCoordinates={0}
             itemClicked={handleItemSelected}
             itemDeleted={handleItemDeleted}

@@ -16,7 +16,7 @@ const defaultCoordinates = (() => {
 
 export const CoordinatesManager = () => {
   const [coordinatesToEdit, setCoordinatesToEdit] =
-    useState<Coordinates>(defaultCoordinates);
+    useState<Coordinates | null>(defaultCoordinates);
   const [coordinatesList, setCoordinatesList] = useState<Coordinates[]>([]);
   const [editMode, setEditMode] = useState<CoordinatesEditMode>("disabled");
 
@@ -37,6 +37,7 @@ export const CoordinatesManager = () => {
   };
 
   const handleCoordinatesAdded = (coordinates: Coordinates) => {
+    console.log("handle coordinates added", coordinates);
     setCoordinatesToEdit(coordinates);
     setCoordinatesList([...coordinatesList, coordinates]);
     setEditMode("Update");
@@ -47,6 +48,7 @@ export const CoordinatesManager = () => {
       setCoordinatesToEdit(coordinates);
       setEditMode("Update");
     } else {
+      setCoordinatesToEdit(null);
       setEditMode("disabled");
     }
   };
@@ -58,6 +60,7 @@ export const CoordinatesManager = () => {
       <div>
         <CoordinatesList
           coordinatesList={coordinatesList}
+          selectedItem={coordinatesToEdit}
           coordinatesSelected={handleCoordinatesSelected}
           coordinatesAdded={handleCoordinatesAdded}
         />
@@ -71,7 +74,7 @@ export const CoordinatesManager = () => {
             )} */}
           </div>
           <CoordinatePairInput
-            initial={coordinatesToEdit}
+            coordinates={coordinatesToEdit}
             editMode={editMode}
             coordinatesSaved={handleCoordinatesSaved}
           />
