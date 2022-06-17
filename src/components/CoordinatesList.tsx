@@ -12,6 +12,7 @@ export type CoordinatesListProps = {
   coordinatesAdded?: (coordinates: Coordinates) => void;
   coordinatesSelected?: (coordinates: Coordinates | null) => void;
   coordinatesDeleted?: (coordinates: Coordinates) => void;
+  coordinatesCopied?: (coordinates: Coordinates) => void;
 };
 export const CoordinatesList = ({
   coordinatesList,
@@ -19,6 +20,7 @@ export const CoordinatesList = ({
   coordinatesAdded,
   coordinatesSelected,
   coordinatesDeleted,
+  coordinatesCopied,
 }: CoordinatesListProps) => {
   // all calls to change selectedItemId state should be in here
   const changeCoordinatesSelection = (coordinates: Coordinates | null) => {
@@ -55,6 +57,13 @@ export const CoordinatesList = ({
     if (coordinatesDeleted) coordinatesDeleted(coordinates);
   };
 
+  //
+  // ITEM COPIED
+  //
+  const handleItemCopied = (coordinates: Coordinates) => {
+    if (coordinatesCopied) coordinatesCopied(coordinates);
+  };
+
   const hasItems = coordinatesList.length > 0;
 
   return (
@@ -75,6 +84,10 @@ export const CoordinatesList = ({
             buttonPressed={() => {}}
           />
           <CCButton
+            buttonContent={<Icon.ArrowCounterclockwise size={iconSize} />}
+            buttonPressed={() => {}}
+          />
+          <CCButton
             buttonContent={<Icon.Trash size={iconSize} />}
             buttonPressed={() => {}}
           />
@@ -90,6 +103,7 @@ export const CoordinatesList = ({
             compareAgainstCoordinates={0}
             itemClicked={handleItemSelected}
             itemDeleted={handleItemDeleted}
+            itemCopied={handleItemCopied}
           />
         ))}
     </div>

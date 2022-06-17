@@ -53,6 +53,19 @@ export const CoordinatesManager = () => {
     }
   };
 
+  const handleCoordinatesDeleted = (coordinates: Coordinates) => {
+    const newSelectedIndex = Math.max(
+      coordinatesList.indexOf(coordinates) - 1,
+      0
+    );
+    const newCoordinatesList = coordinatesList.filter(
+      (coords) => coords.id !== coordinates.id
+    );
+
+    setCoordinatesToEdit(newCoordinatesList[newSelectedIndex]);
+    setCoordinatesList(newCoordinatesList);
+  };
+
   return (
     <div className="coordinatesManager">
       <h2>Manage coordinates below!</h2>
@@ -63,6 +76,8 @@ export const CoordinatesManager = () => {
           selectedItem={coordinatesToEdit}
           coordinatesSelected={handleCoordinatesSelected}
           coordinatesAdded={handleCoordinatesAdded}
+          coordinatesCopied={handleCoordinatesAdded}
+          coordinatesDeleted={handleCoordinatesDeleted}
         />
         <div className="item1">
           <div className="row">

@@ -41,7 +41,7 @@ export const DMSCoordinateInput = ({
 
       <VerticalInputLabelPair
         label="Sec."
-        value={`${Number(seconds.toFixed(5))}`}
+        value={`${Number(seconds.toFixed(5)) % 60}`}
         inputChanged={(text) => {
           handleUpdate({ ...dms, seconds: Number(text) });
         }}

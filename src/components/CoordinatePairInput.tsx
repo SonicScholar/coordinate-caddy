@@ -91,18 +91,14 @@ const CoordinatePairInput = ({
         </div>
       )}
       <div className="coordinatesInputButtons">
-        {editMode !== "disabled" && (
-          <>
-            <CCButton
-              buttonContent={<Icon.XLg size={iconSize} />}
-              buttonPressed={handleCoordinatesUpdated}
-            />
-            <CCButton
-              buttonContent={<Icon.CheckLg size={iconSize} />}
-              buttonPressed={handleCoordinatesUpdated}
-            />
-          </>
-        )}
+        <CCButton
+          buttonContent={<Icon.XLg size={iconSize} />}
+          buttonPressed={handleCoordinatesUpdated}
+        />
+        <CCButton
+          buttonContent={<Icon.CheckLg size={iconSize} />}
+          buttonPressed={handleCoordinatesUpdated}
+        />
       </div>
     </div>
   );
