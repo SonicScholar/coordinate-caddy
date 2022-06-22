@@ -7,6 +7,7 @@ import {
   CoordinatesEditMode,
 } from "./CoordinatePairInput";
 import { CCButton } from "./controls/CCButton";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const defaultCoordinates = (() => {
   const coords = new Coordinates(0, 0, 0, 0, "");
@@ -14,10 +15,18 @@ const defaultCoordinates = (() => {
   return coords;
 })();
 
+const COORDINATES_LIST_LOCAL_STORAGE = "CoordinatesList";
 export const CoordinatesManager = () => {
+  //get coordinates from local storage
+  const [coordinatesListStorage, setCoordinatesListStorage] = useLocalStorage<
+    Coordinates[]
+  >(COORDINATES_LIST_LOCAL_STORAGE, []);
+
   const [coordinatesToEdit, setCoordinatesToEdit] =
     useState<Coordinates | null>(defaultCoordinates);
-  const [coordinatesList, setCoordinatesList] = useState<Coordinates[]>([]);
+  const [coordinatesList, setCoordinatesList] = useState<Coordinates[]>(
+    coordinatesListStorage
+  );
   const [editMode, setEditMode] = useState<CoordinatesEditMode>("disabled");
 
   const handleCoordinatesSaved = (coordinates: Coordinates) => {
@@ -66,6 +75,15 @@ export const CoordinatesManager = () => {
     setCoordinatesList(newCoordinatesList);
   };
 
+  const handleSaveAllClicked = () => {
+    setCoordinatesListStorage(coordinatesList);
+  };
+
+  const handleRevertCoordinatesClicked = () => {
+    console.log(coordinatesListStorage);
+    setCoordinatesList(coordinatesListStorage);
+  };
+
   return (
     <div className="coordinatesManager">
       <h2>Manage coordinates below!</h2>
@@ -75,9 +93,11 @@ export const CoordinatesManager = () => {
           coordinatesList={coordinatesList}
           selectedItem={coordinatesToEdit}
           coordinatesSelected={handleCoordinatesSelected}
-          coordinatesAdded={handleCoordinatesAdded}
+          coordinatesSaved={handleCoordinatesAdded}
           coordinatesCopied={handleCoordinatesAdded}
           coordinatesDeleted={handleCoordinatesDeleted}
+          saveAllClicked={handleSaveAllClicked}
+          revertAllClicked={handleRevertCoordinatesClicked}
         />
         <div className="item1">
           <div className="row">

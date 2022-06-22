@@ -9,18 +9,22 @@ import { CCButton } from "./controls/CCButton";
 export type CoordinatesListProps = {
   coordinatesList: Coordinates[];
   selectedItem: Coordinates | null;
-  coordinatesAdded?: (coordinates: Coordinates) => void;
+  coordinatesSaved?: (coordinates: Coordinates) => void;
   coordinatesSelected?: (coordinates: Coordinates | null) => void;
   coordinatesDeleted?: (coordinates: Coordinates) => void;
   coordinatesCopied?: (coordinates: Coordinates) => void;
+  saveAllClicked?: () => void;
+  revertAllClicked?: () => void;
 };
 export const CoordinatesList = ({
   coordinatesList,
   selectedItem,
-  coordinatesAdded,
+  coordinatesSaved: coordinatesAdded,
   coordinatesSelected,
   coordinatesDeleted,
   coordinatesCopied,
+  saveAllClicked,
+  revertAllClicked,
 }: CoordinatesListProps) => {
   // all calls to change selectedItemId state should be in here
   const changeCoordinatesSelection = (coordinates: Coordinates | null) => {
@@ -64,6 +68,14 @@ export const CoordinatesList = ({
     if (coordinatesCopied) coordinatesCopied(coordinates);
   };
 
+  const handleSaveAllClicked = () => {
+    if (saveAllClicked) saveAllClicked();
+  };
+
+  const handleRevertAllClicked = () => {
+    if (revertAllClicked) revertAllClicked();
+  };
+
   const hasItems = coordinatesList.length > 0;
 
   return (
@@ -81,11 +93,11 @@ export const CoordinatesList = ({
           />
           <CCButton
             buttonContent={<Icon.Save2 size={iconSize} />}
-            buttonPressed={() => {}}
+            buttonPressed={handleSaveAllClicked}
           />
           <CCButton
             buttonContent={<Icon.ArrowCounterclockwise size={iconSize} />}
-            buttonPressed={() => {}}
+            buttonPressed={handleRevertAllClicked}
           />
           <CCButton
             buttonContent={<Icon.Trash size={iconSize} />}
