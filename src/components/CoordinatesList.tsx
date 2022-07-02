@@ -3,7 +3,6 @@ import * as Icon from "react-bootstrap-icons";
 import { iconSize } from "../App";
 import { Coordinates } from "../Coordinates";
 import { CoordinatesListItem } from "./CoordinatesListItem";
-import { useEffect, useState } from "react";
 import { CCButton } from "./controls/CCButton";
 
 export type CoordinatesListProps = {
