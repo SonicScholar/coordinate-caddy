@@ -8,7 +8,7 @@ export type InputProps = {
   placeholder?: string;
 };
 
-export const Input = ({
+export const Input: React.FC<InputProps> = ({
   value = "",
   type,
   valueChanged,

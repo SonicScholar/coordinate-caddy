@@ -7,38 +7,22 @@ import { CCButton } from "./controls/CCButton";
 import { useContext } from "react";
 import { CoordinatesContext } from "../contexts/CoordinatesContext";
 
-export type CoordinatesListProps = {};
-export const CoordinatesList = () => {
+export const CoordinatesList: React.FC = () => {
   //
   const {
-    selectCoordinates,
     addCoordinates,
     coordinatesList,
-    selectedCoordinates,
-    deleteCoordinates,
     saveAllCoordinates,
+    deleteAllCoordinates,
     revertToLastSavedCoordinates,
   } = useContext(CoordinatesContext);
 
   //
   // ITEM ADDED
   //
-  const handleItemAdded = () => {
+  const addNewCoordinates = () => {
     const newCoordinates = new Coordinates(0, 0, 0, 0, "New Coordinates");
     addCoordinates(newCoordinates);
-  };
-
-  //
-  // ITEM SELECTED / DE-SELECTED
-  //
-  const handleItemSelected = (coordinates: Coordinates) => {
-    const { id } = coordinates;
-    //deselect if on the currently selected
-    if (selectedCoordinates?.id === id) {
-      selectCoordinates(null);
-      return;
-    }
-    selectCoordinates(coordinates);
   };
 
   const hasItems = coordinatesList.length > 0;
@@ -54,7 +38,7 @@ export const CoordinatesList = () => {
         <div className="actionButtons">
           <CCButton
             buttonContent={<Icon.PlusLg size={iconSize} />}
-            buttonPressed={handleItemAdded}
+            buttonPressed={addNewCoordinates}
           />
           <CCButton
             buttonContent={<Icon.Save2 size={iconSize} />}
@@ -66,22 +50,14 @@ export const CoordinatesList = () => {
           />
           <CCButton
             buttonContent={<Icon.Trash size={iconSize} />}
-            buttonPressed={() => {}}
+            buttonPressed={deleteAllCoordinates}
           />
         </div>
       </div>
 
       {hasItems &&
         coordinatesList.map((coordinates) => (
-          <CoordinatesListItem
-            key={coordinates.id}
-            coordinates={coordinates}
-            isSelected={coordinates.id === selectedCoordinates?.id}
-            compareAgainstCoordinates={0}
-            itemClicked={handleItemSelected}
-            itemDeleted={deleteCoordinates}
-            itemCopied={addCoordinates}
-          />
+          <CoordinatesListItem key={coordinates.id} coordinates={coordinates} />
         ))}
     </div>
   );

@@ -32,6 +32,7 @@ export default function App() {
       .catch((reason) => {
         console.log("failed to load config.json", reason);
         setConfigReadyState("error");
+        //todo: if debug environment, use local config
       });
   }, [setConfig]);
 

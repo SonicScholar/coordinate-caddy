@@ -10,12 +10,11 @@ export type CoordinateInputProps = {
   coordinateChanged?: (value: number) => void;
 };
 
-//COMPONENT
-function CoordinateInput({
+const CoordinateInput: React.FC<CoordinateInputProps> = ({
   label: name,
   decimalDegreesValue,
   coordinateChanged,
-}: CoordinateInputProps) {
+}) => {
   const [decimalDegrees, setDecimalDegrees] = useState(decimalDegreesValue);
   const currentCoordinate = new RadialCoordinate(decimalDegrees);
 
@@ -65,6 +64,6 @@ function CoordinateInput({
       />
     </div>
   );
-}
+};
 
 export { CoordinateInput };

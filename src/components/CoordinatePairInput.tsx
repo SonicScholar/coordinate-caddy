@@ -8,19 +8,12 @@ import { CCButton } from "./controls/CCButton";
 import * as Icon from "react-bootstrap-icons";
 import { iconSize } from "../App";
 
-// const initialCoordinates = new Coordinates(
-//   40.5852602,
-//   -105.084423,
-//   0,
-//   0,
-//   "Fort Collins"
-// );
 type CoordinatePairInputProps = {
   coordinates: Coordinates | null;
   editMode: CoordinatesEditMode;
   coordinatesSaved: (coordinates: Coordinates) => void;
 };
-const CoordinatePairInput = ({
+const CoordinatePairInput: React.FC<CoordinatePairInputProps> = ({
   coordinates,
   editMode,
   coordinatesSaved,

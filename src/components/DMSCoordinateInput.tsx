@@ -8,7 +8,7 @@ export type DMSCoordinateInputProps = {
   onUpdate?: (degrees: number, minutes: number, seconds: number) => void;
 };
 
-export const DMSCoordinateInput = ({
+export const DMSCoordinateInput: React.FC<DMSCoordinateInputProps> = ({
   degrees,
   minutes,
   seconds,

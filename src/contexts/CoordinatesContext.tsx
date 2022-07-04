@@ -10,6 +10,7 @@ const defaultValue: CoordinatesHook = {
   addCoordinates: () => {},
   selectCoordinates: () => {},
   deleteCoordinates: () => {},
+  deleteAllCoordinates: () => {},
   revertToLastSavedCoordinates: () => {},
 };
 export const CoordinatesContext = createContext<CoordinatesHook>(defaultValue);

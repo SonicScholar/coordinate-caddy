@@ -8,7 +8,7 @@ const getSiteUrlWithTrailingSlash = (siteUrl: string) =>
 export const getAboutUrl = (siteUrl: string) =>
   getSiteUrlWithTrailingSlash(siteUrl) + "about";
 
-export const Nav = () => {
+export const Nav: React.FC = () => {
   const { config } = useContext(ConfigContext);
 
   const aboutUrl = getAboutUrl(config.siteUrl);

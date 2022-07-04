@@ -5,11 +5,7 @@ import { useLocalStorage } from "./useLocalStorage";
 
 const COORDINATES_LIST_LOCAL_STORAGE = "CoordinatesList";
 
-const defaultCoordinates = (() => {
-  const coords = new Coordinates(0, 0, 0, 0, "");
-  coords.id = -1;
-  return coords;
-})();
+const defaultCoordinates: Coordinates | null = null;
 
 export type CoordinatesHook = {
   coordinatesList: Coordinates[];
@@ -20,6 +16,7 @@ export type CoordinatesHook = {
   addCoordinates: (coordinates: Coordinates) => void;
   selectCoordinates: (coordinates: Coordinates | null) => void;
   deleteCoordinates: (coordinates: Coordinates) => void;
+  deleteAllCoordinates: () => void;
   revertToLastSavedCoordinates: () => void;
 };
 
@@ -106,15 +103,23 @@ export const useCoordinates = (): CoordinatesHook => {
       setEditMode("disabled");
       setSelectedCoordinates(null);
     } else {
+      //if nothing was selected before, don't select anything
+      //else select the previous adjacent item
       const newSelectedCoordinates =
-        selectCoordinates === null
+        selectedCoordinates === null
           ? null
           : newCoordinatesList[newSelectedIndex];
+
       setSelectedCoordinates(newSelectedCoordinates);
     }
     setCoordinatesList(newCoordinatesList);
   };
 
+  const deleteAllCoordinates = () => {
+    setCoordinatesList([]);
+    setSelectedCoordinates(null);
+    setEditMode("disabled");
+  };
   //
   // save all coordinates to local storage
   //
@@ -140,6 +145,7 @@ export const useCoordinates = (): CoordinatesHook => {
     addCoordinates,
     selectCoordinates,
     deleteCoordinates,
+    deleteAllCoordinates,
     revertToLastSavedCoordinates,
   };
 

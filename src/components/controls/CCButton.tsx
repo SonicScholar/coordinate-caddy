@@ -6,7 +6,7 @@ type CCButtonProps = {
   buttonPressed: (e: React.MouseEvent) => void;
   className?: string;
 };
-export const CCButton = ({
+export const CCButton: React.FC<CCButtonProps> = ({
   buttonContent: buttonText,
   enabled = true,
   buttonPressed,

@@ -2,25 +2,25 @@ import "./css/CoordinatesListItem.css";
 import * as Icon from "react-bootstrap-icons";
 import { iconSize } from "../App";
 import { Coordinates } from "../Coordinates";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CCButton } from "./controls/CCButton";
+import { CoordinatesContext } from "../contexts/CoordinatesContext";
 
 export type CoordinatesListItemProps = {
   coordinates: Coordinates;
-  isSelected: boolean;
-  compareAgainstCoordinates: number;
-  itemClicked?: (coords: Coordinates) => void;
-  itemDeleted?: (coords: Coordinates) => void;
-  itemCopied?: (coords: Coordinates) => void;
 };
-export const CoordinatesListItem = ({
+export const CoordinatesListItem: React.FC<CoordinatesListItemProps> = ({
   coordinates,
-  isSelected,
-  itemClicked,
-  itemDeleted,
-  itemCopied,
 }: CoordinatesListItemProps) => {
+  const {
+    selectedCoordinates,
+    selectCoordinates,
+    deleteCoordinates,
+    addCoordinates,
+  } = useContext(CoordinatesContext);
   const [isHovered, setIsHovered] = useState(false);
+
+  const isSelected = coordinates.id === selectedCoordinates?.id;
 
   let className = "coordinatesListItem";
   if (isSelected) className += " itemSelected";
@@ -34,22 +34,26 @@ export const CoordinatesListItem = ({
   // be configurable via a prop or something...
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (itemClicked) itemClicked(coordinates);
+    const { id } = coordinates;
+    //deselect if on the currently selected
+    if (selectedCoordinates?.id === id) {
+      selectCoordinates(null);
+      return;
+    }
+    selectCoordinates(coordinates);
   };
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (itemDeleted) itemDeleted(coordinates);
+    deleteCoordinates(coordinates);
   };
 
   const handleCopy = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (itemCopied) {
-      //make a copy of the coordinates with new Id, but same other values
-      const { latitude, longitude, M, Z, name } = coordinates;
-      const newCoordinates = new Coordinates(latitude, longitude, Z, M, name);
-      itemCopied(newCoordinates);
-    }
+    //make a copy of the coordinates with new Id, but same other values
+    const { latitude, longitude, M, Z, name } = coordinates;
+    const newCoordinates = new Coordinates(latitude, longitude, Z, M, name);
+    addCoordinates(newCoordinates);
   };
 
   return (

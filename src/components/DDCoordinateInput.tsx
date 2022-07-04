@@ -6,7 +6,7 @@ type DDCoordinateInputProps = {
   onUpdate: (dd: number) => void;
 };
 
-export const DDCoordinateInput = ({
+export const DDCoordinateInput: React.FC<DDCoordinateInputProps> = ({
   decimalDegrees,
   onUpdate,
 }: DDCoordinateInputProps) => {

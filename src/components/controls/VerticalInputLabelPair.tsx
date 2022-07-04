@@ -8,7 +8,7 @@ export type VerticalInputLabelPairProps = {
   inputChanged: (value: string) => void;
 };
 
-export const VerticalInputLabelPair = ({
+export const VerticalInputLabelPair: React.FC<VerticalInputLabelPairProps> = ({
   label = "label",
   value = "value",
   inputType = "text",
