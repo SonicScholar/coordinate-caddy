@@ -4,75 +4,41 @@ import { iconSize } from "../App";
 import { Coordinates } from "../Coordinates";
 import { CoordinatesListItem } from "./CoordinatesListItem";
 import { CCButton } from "./controls/CCButton";
+import { useContext } from "react";
+import { CoordinatesContext } from "../contexts/CoordinatesContext";
 
-export type CoordinatesListProps = {
-  coordinatesList: Coordinates[];
-  selectedItem: Coordinates | null;
-  coordinatesSaved?: (coordinates: Coordinates) => void;
-  coordinatesSelected?: (coordinates: Coordinates | null) => void;
-  coordinatesDeleted?: (coordinates: Coordinates) => void;
-  coordinatesCopied?: (coordinates: Coordinates) => void;
-  saveAllClicked?: () => void;
-  revertAllClicked?: () => void;
-};
-export const CoordinatesList = ({
-  coordinatesList,
-  selectedItem,
-  coordinatesSaved: coordinatesAdded,
-  coordinatesSelected,
-  coordinatesDeleted,
-  coordinatesCopied,
-  saveAllClicked,
-  revertAllClicked,
-}: CoordinatesListProps) => {
-  // all calls to change selectedItemId state should be in here
-  const changeCoordinatesSelection = (coordinates: Coordinates | null) => {
-    if (coordinatesSelected) coordinatesSelected(coordinates);
-  };
+export type CoordinatesListProps = {};
+export const CoordinatesList = () => {
+  //
+  const {
+    selectCoordinates,
+    addCoordinates,
+    coordinatesList,
+    selectedCoordinates,
+    deleteCoordinates,
+    saveAllCoordinates,
+    revertToLastSavedCoordinates,
+  } = useContext(CoordinatesContext);
 
   //
   // ITEM ADDED
   //
   const handleItemAdded = () => {
-    if (coordinatesAdded) {
-      const newCoordinates = new Coordinates(0, 0, 0, 0, "New Coordinates");
-      coordinatesAdded(newCoordinates);
-    }
+    const newCoordinates = new Coordinates(0, 0, 0, 0, "New Coordinates");
+    addCoordinates(newCoordinates);
   };
 
   //
-  // ITEM SELECTED
+  // ITEM SELECTED / DE-SELECTED
   //
   const handleItemSelected = (coordinates: Coordinates) => {
     const { id } = coordinates;
     //deselect if on the currently selected
-    if (selectedItem?.id === id) {
-      changeCoordinatesSelection(null);
+    if (selectedCoordinates?.id === id) {
+      selectCoordinates(null);
       return;
     }
-    changeCoordinatesSelection(coordinates);
-  };
-
-  //
-  // ITEM DELETED
-  //
-  const handleItemDeleted = (coordinates: Coordinates) => {
-    if (coordinatesDeleted) coordinatesDeleted(coordinates);
-  };
-
-  //
-  // ITEM COPIED
-  //
-  const handleItemCopied = (coordinates: Coordinates) => {
-    if (coordinatesCopied) coordinatesCopied(coordinates);
-  };
-
-  const handleSaveAllClicked = () => {
-    if (saveAllClicked) saveAllClicked();
-  };
-
-  const handleRevertAllClicked = () => {
-    if (revertAllClicked) revertAllClicked();
+    selectCoordinates(coordinates);
   };
 
   const hasItems = coordinatesList.length > 0;
@@ -92,11 +58,11 @@ export const CoordinatesList = ({
           />
           <CCButton
             buttonContent={<Icon.Save2 size={iconSize} />}
-            buttonPressed={handleSaveAllClicked}
+            buttonPressed={saveAllCoordinates}
           />
           <CCButton
             buttonContent={<Icon.ArrowCounterclockwise size={iconSize} />}
-            buttonPressed={handleRevertAllClicked}
+            buttonPressed={revertToLastSavedCoordinates}
           />
           <CCButton
             buttonContent={<Icon.Trash size={iconSize} />}
@@ -110,11 +76,11 @@ export const CoordinatesList = ({
           <CoordinatesListItem
             key={coordinates.id}
             coordinates={coordinates}
-            isSelected={coordinates.id === selectedItem?.id}
+            isSelected={coordinates.id === selectedCoordinates?.id}
             compareAgainstCoordinates={0}
             itemClicked={handleItemSelected}
-            itemDeleted={handleItemDeleted}
-            itemCopied={handleItemCopied}
+            itemDeleted={deleteCoordinates}
+            itemCopied={addCoordinates}
           />
         ))}
     </div>

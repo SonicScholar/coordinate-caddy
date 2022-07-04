@@ -16,7 +16,6 @@ export type CoordinatesListItemProps = {
 export const CoordinatesListItem = ({
   coordinates,
   isSelected,
-  compareAgainstCoordinates,
   itemClicked,
   itemDeleted,
   itemCopied,
@@ -52,8 +51,6 @@ export const CoordinatesListItem = ({
       itemCopied(newCoordinates);
     }
   };
-  let deleteIcon = String.fromCharCode(0x00d7);
-  deleteIcon = String.fromCharCode(0x1f5ce);
 
   return (
     <div

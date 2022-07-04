@@ -2,6 +2,7 @@ import "./css/CoordinatePairInput.css";
 import { CoordinateInput } from "./CoordinateInput";
 import { CoordinateInfo } from "./CoordinateInfo";
 import { Coordinates } from "../Coordinates";
+import { CoordinatesEditMode } from "../CustomTypes";
 import { useEffect, useState } from "react";
 import { CCButton } from "./controls/CCButton";
 import * as Icon from "react-bootstrap-icons";
@@ -14,7 +15,6 @@ import { iconSize } from "../App";
 //   0,
 //   "Fort Collins"
 // );
-export type CoordinatesEditMode = "Add" | "Update" | "disabled";
 type CoordinatePairInputProps = {
   coordinates: Coordinates | null;
   editMode: CoordinatesEditMode;

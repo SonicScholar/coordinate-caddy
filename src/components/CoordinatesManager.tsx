@@ -1,114 +1,35 @@
 import "./css/CoordinatesManager.css";
-import { useState } from "react";
-import { Coordinates } from "../Coordinates";
 import { CoordinatesList } from "./CoordinatesList";
+import { CoordinatePairInput } from "./CoordinatePairInput";
+import { useContext } from "react";
 import {
-  CoordinatePairInput,
-  CoordinatesEditMode,
-} from "./CoordinatePairInput";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+  CoordinatesContext,
+  CoordinatesProvider,
+} from "../contexts/CoordinatesContext";
 
-const defaultCoordinates = (() => {
-  const coords = new Coordinates(0, 0, 0, 0, "");
-  coords.id = -1;
-  return coords;
-})();
-
-const COORDINATES_LIST_LOCAL_STORAGE = "CoordinatesList";
-export const CoordinatesManager = () => {
-  //get coordinates from local storage
-  const [coordinatesListStorage, setCoordinatesListStorage] = useLocalStorage<
-    Coordinates[]
-  >(COORDINATES_LIST_LOCAL_STORAGE, []);
-
-  const [coordinatesToEdit, setCoordinatesToEdit] =
-    useState<Coordinates | null>(defaultCoordinates);
-  const [coordinatesList, setCoordinatesList] = useState<Coordinates[]>(
-    coordinatesListStorage
+export const CoordinatesManager: React.FC = () => {
+  return (
+    <CoordinatesProvider>
+      <CoordinatesManagerInternal />
+    </CoordinatesProvider>
   );
-  const [editMode, setEditMode] = useState<CoordinatesEditMode>("disabled");
+};
 
-  const handleCoordinatesSaved = (coordinates: Coordinates) => {
-    //update existing coordinates
-    const newCoordinatesList = coordinatesList.map((coords) => {
-      return coordinates.id === coords.id ? coordinates : coords;
-    });
-    //add new one if needed
-    if (editMode === "Add") {
-      newCoordinatesList.push(coordinates);
-      setEditMode("disabled");
-      setCoordinatesToEdit(new Coordinates(0, 0, 0, 0, ""));
-    }
-
-    setCoordinatesList(newCoordinatesList);
-  };
-
-  const handleCoordinatesAdded = (coordinates: Coordinates) => {
-    console.log("handle coordinates added", coordinates);
-    setCoordinatesToEdit(coordinates);
-    setCoordinatesList([...coordinatesList, coordinates]);
-    setEditMode("Update");
-  };
-
-  const handleCoordinatesSelected = (coordinates: Coordinates | null) => {
-    if (coordinates !== null) {
-      setCoordinatesToEdit(coordinates);
-      setEditMode("Update");
-    } else {
-      setCoordinatesToEdit(null);
-      setEditMode("disabled");
-    }
-  };
-
-  const handleCoordinatesDeleted = (coordinates: Coordinates) => {
-    const newSelectedIndex = Math.max(
-      coordinatesList.indexOf(coordinates) - 1,
-      0
-    );
-    const newCoordinatesList = coordinatesList.filter(
-      (coords) => coords.id !== coordinates.id
-    );
-
-    setCoordinatesToEdit(newCoordinatesList[newSelectedIndex]);
-    setCoordinatesList(newCoordinatesList);
-  };
-
-  const handleSaveAllClicked = () => {
-    setCoordinatesListStorage(coordinatesList);
-  };
-
-  const handleRevertCoordinatesClicked = () => {
-    setCoordinatesList(coordinatesListStorage);
-  };
+const CoordinatesManagerInternal: React.FC = ({ children }) => {
+  const { selectedCoordinates, editMode, saveCoordinates } =
+    useContext(CoordinatesContext);
 
   return (
     <div className="coordinatesManager">
       <h2>Manage coordinates below!</h2>
 
       <div>
-        <CoordinatesList
-          coordinatesList={coordinatesList}
-          selectedItem={coordinatesToEdit}
-          coordinatesSelected={handleCoordinatesSelected}
-          coordinatesSaved={handleCoordinatesAdded}
-          coordinatesCopied={handleCoordinatesAdded}
-          coordinatesDeleted={handleCoordinatesDeleted}
-          saveAllClicked={handleSaveAllClicked}
-          revertAllClicked={handleRevertCoordinatesClicked}
-        />
+        <CoordinatesList />
         <div className="item1">
-          <div className="row">
-            {/* {addCoordinateButtonEnabled && (
-              <CCButton
-                buttonContent="Add New Coordinate"
-                buttonPressed={handleAddNewCoordinate}
-              />
-            )} */}
-          </div>
           <CoordinatePairInput
-            coordinates={coordinatesToEdit}
+            coordinates={selectedCoordinates}
             editMode={editMode}
-            coordinatesSaved={handleCoordinatesSaved}
+            coordinatesSaved={saveCoordinates}
           />
         </div>
       </div>
