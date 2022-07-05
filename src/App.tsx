@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
 import { getAboutUrl, Nav } from "./components/Nav";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { CoordinatesManager } from "./components/CoordinatesManager";
 import { globalConfigUrl } from "./Config";
 import { ConfigContext } from "./contexts/ConfigContext";
@@ -46,7 +46,7 @@ export default function App() {
 
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <Nav />
         <div className="App">
           <h1>
@@ -64,7 +64,7 @@ export default function App() {
             </Routes>
           </div>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }
