@@ -5,6 +5,7 @@ import { Coordinates } from "../Coordinates";
 import React, { useContext, useState } from "react";
 import { CCButton } from "./controls/CCButton";
 import { CoordinatesContext } from "../contexts/CoordinatesContext";
+import { friendlyDistance, vincentyInverse } from "../vincenty";
 
 export type CoordinatesListItemProps = {
   coordinates: Coordinates;
@@ -22,10 +23,19 @@ export const CoordinatesListItem: React.FC<CoordinatesListItemProps> = ({
 
   const isSelected = coordinates.id === selectedCoordinates?.id;
 
-  let className = "coordinatesListItem";
+  let className = "coordinatesListItem coordinatesListGrid";
   if (isSelected) className += " itemSelected";
 
   const { name, latitude, longitude } = coordinates;
+
+  let distanceToSelected: number | string | null = "";
+
+  if (isSelected) distanceToSelected = "0.00 cm";
+  else if (selectedCoordinates === null) distanceToSelected = "N/A";
+  else {
+    const rawDistance = vincentyInverse(coordinates, selectedCoordinates);
+    distanceToSelected = friendlyDistance(rawDistance);
+  }
 
   // Note on MouseEvent handlers:
   // just in case the parent component is listening for
@@ -63,12 +73,13 @@ export const CoordinatesListItem: React.FC<CoordinatesListItemProps> = ({
       onMouseOver={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="name">{name}</div>
-      <div className="latlon">
+      <div className="name col1">{name}</div>
+      <div className="latlon col2">
         <div className="lat">{Number(latitude.toFixed(8))}</div>
         <div className="lon">{Number(longitude.toFixed(8))}</div>
       </div>
-      <div className="coordinatesItemAction">
+      <div className="distance col3">{distanceToSelected}</div>
+      <div className="coordinatesItemAction col4">
         {isHovered && (
           <>
             <CCButton

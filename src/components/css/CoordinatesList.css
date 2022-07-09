@@ -27,3 +27,13 @@
 .coordinatesList .actionButtons .ccbutton:not(:last-child) {
   margin-right: 6px;
 }
+
+.listItemsContainer>div:first-child{
+  border-bottom: 1px dashed turquoise;
+}
+
+.coordinatesListGrid {
+  display: grid;
+  grid-template-columns: 40% 150px;
+  padding: 6px 6px 6px 20px;
+}

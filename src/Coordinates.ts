@@ -21,4 +21,14 @@ export class Coordinates {
     this.M = M;
     this.name = name;
   }
+
+  static copy(coordinates: Coordinates) {
+    return new Coordinates(
+      coordinates.latitude,
+      coordinates.longitude,
+      coordinates.Z,
+      coordinates.M,
+      coordinates.name
+    );
+  }
 }

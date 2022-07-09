@@ -78,3 +78,19 @@ nav a:hover {
   animation: flash .35s;
   border-radius: 3px; /*round out the flash*/
 }
+
+.col1{
+  grid-column-start: 1;
+}
+.col2{
+  grid-column-start: 2;
+}
+.col3{
+  grid-column-start: 3;
+}
+.col4{
+  grid-column-start: 4;
+}
+.col5{
+  grid-column-start: 5;
+}

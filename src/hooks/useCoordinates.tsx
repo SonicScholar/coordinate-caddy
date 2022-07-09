@@ -51,9 +51,16 @@ export const useCoordinates = (): CoordinatesHook => {
   // HANDLERS
   //
   const saveCoordinates = (coordinates: Coordinates) => {
-    //update existing coordinates
+    //deep copy of coordinates to trigger component re-renders
+    //dependent on the currently selected coordinate
+    const copy = Coordinates.copy(coordinates);
+    if (selectedCoordinates?.id === coordinates.id)
+      setSelectedCoordinates(copy);
+
+    //update existing coordinates. make sure to use the copy
+    //so that we don't end up with mismatched id's elsewhere
     const newCoordinatesList = coordinatesList.map((coords) => {
-      return coordinates.id === coords.id ? coordinates : coords;
+      return coordinates.id === coords.id ? copy : coords;
     });
     //add new one if needed
     if (editMode === "Add") {

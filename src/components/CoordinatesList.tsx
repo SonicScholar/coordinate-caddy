@@ -54,11 +54,21 @@ export const CoordinatesList: React.FC = () => {
           />
         </div>
       </div>
-
-      {hasItems &&
-        coordinatesList.map((coordinates) => (
-          <CoordinatesListItem key={coordinates.id} coordinates={coordinates} />
-        ))}
+      <div className="listItemsContainer">
+        <div className="coordinatesListGrid">
+          <div className="col1">Name:</div>
+          <div className="col2">Coordinates:</div>
+          <div className="col3">Distance to selected</div>
+          <div className="col4"></div>
+        </div>
+        {hasItems &&
+          coordinatesList.map((coordinates) => (
+            <CoordinatesListItem
+              key={coordinates.id}
+              coordinates={coordinates}
+            />
+          ))}
+      </div>
     </div>
   );
 };

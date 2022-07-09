@@ -1,6 +1,12 @@
-.coordinatesListItem {
+/* .coordinatesListItem {
   display: flex;
   justify-content: flex-end;
+  padding: 6px 6px 6px 20px;
+} */
+
+.coordinatesListItem {
+  /* display: grid;
+  grid-template-columns: 40% 150px 60px; */
   padding: 6px 6px 6px 20px;
 }
 
@@ -20,9 +26,9 @@
   border-bottom: 0.5px dashed turquoise;
 }
 
-.coordinatesListItem > div:not(:last-child) {
+/* .coordinatesListItem > div:not(:last-child) {
   padding-right: 20px;
-}
+} */
 
 .coordinatesListItem.itemSelected {
   background-color: rgba(64, 224, 208, 0.3);

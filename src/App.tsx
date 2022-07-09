@@ -50,9 +50,10 @@ export default function App() {
         <Nav />
         <div className="App">
           <h1>
-            <Icon.GeoAltFill />
+            <Icon.CalculatorFill />
             &nbsp;Coordinate Caddy&nbsp;
-            <Icon.Globe2 />
+            <Icon.Pin />
+            <Icon.MapFill />
           </h1>
           <div className="container">
             <Routes>

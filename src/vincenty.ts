@@ -51,7 +51,7 @@ export const vincentyInverse = (p1: Coordinates, p2: Coordinates) => {
     const tmp = cosU1 * sinU2 - sinU1 * cosU2 * cosLambda;
     sinSigma = sqrt(cosU2 * cosU2 * sinLambda * sinLambda + tmp * tmp); // (14)
 
-    if (sinSigma == 0.0) return 0.0; // coincident points
+    if (sinSigma === 0.0) return 0.0; // coincident points
 
     cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda; // (15)
 
@@ -80,7 +80,7 @@ export const vincentyInverse = (p1: Coordinates, p2: Coordinates) => {
               C * cosSigma * (-1 + 2 * cosTwoSigmaM * cosTwoSigmaM))); // (11)
   } while (abs(lambda - prev) > 1e-10 && --limit > 0); // Iterate until change is negligible.  ???
 
-  if (limit == 0) return NaN; // no convergence, fmod(n.n, 0.0) returns NaN.
+  if (limit === 0) return NaN; // no convergence, fmod(n.n, 0.0) returns NaN.
 
   const uSquared = (cosSquaredAlpha * (a * a - bSquared)) / bSquared;
   const A =
@@ -107,3 +107,16 @@ export const vincentyInverse = (p1: Coordinates, p2: Coordinates) => {
 
   return distance;
 };
+
+export function friendlyDistance(distanceInMeters: number): string {
+  let units = "m";
+  let numeric = distanceInMeters;
+  if (distanceInMeters >= 1000) {
+    numeric = distanceInMeters / 1000;
+    units = "km";
+  } else if (distanceInMeters < 1) {
+    numeric *= 100;
+    units = "cm";
+  }
+  return `${numeric.toFixed(1)} ${units}`;
+}
