@@ -36,22 +36,18 @@ export const CoordinatesList: React.FC = () => {
             : "Add some coordinates"}
         </div>
         <div className="actionButtons">
-          <CCButton
-            buttonContent={<Icon.PlusLg size={iconSize} />}
-            buttonPressed={addNewCoordinates}
-          />
-          <CCButton
-            buttonContent={<Icon.Save2 size={iconSize} />}
-            buttonPressed={saveAllCoordinates}
-          />
-          <CCButton
-            buttonContent={<Icon.ArrowCounterclockwise size={iconSize} />}
-            buttonPressed={revertToLastSavedCoordinates}
-          />
-          <CCButton
-            buttonContent={<Icon.Trash size={iconSize} />}
-            buttonPressed={deleteAllCoordinates}
-          />
+          <CCButton buttonPressed={addNewCoordinates}>
+            <Icon.PlusLg size={iconSize} />
+          </CCButton>
+          <CCButton buttonPressed={saveAllCoordinates}>
+            <Icon.Save2 size={iconSize} />
+          </CCButton>
+          <CCButton buttonPressed={revertToLastSavedCoordinates}>
+            <Icon.ArrowCounterclockwise size={iconSize} />
+          </CCButton>
+          <CCButton buttonPressed={deleteAllCoordinates}>
+            <Icon.Trash size={iconSize} />
+          </CCButton>
         </div>
       </div>
       <div className="listItemsContainer">

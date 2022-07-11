@@ -82,16 +82,12 @@ export const CoordinatesListItem: React.FC<CoordinatesListItemProps> = ({
       <div className="coordinatesItemAction col4">
         {isHovered && (
           <>
-            <CCButton
-              buttonContent={<Icon.Clipboard2Plus size={iconSize} />}
-              enabled={true}
-              buttonPressed={handleCopy}
-            />
-            <CCButton
-              buttonContent={<Icon.XLg size={iconSize} />}
-              enabled={true}
-              buttonPressed={handleDelete}
-            />
+            <CCButton enabled={true} buttonPressed={handleCopy}>
+              <Icon.Clipboard2Plus size={iconSize} />
+            </CCButton>
+            <CCButton enabled={true} buttonPressed={handleDelete}>
+              <Icon.XLg size={iconSize} />
+            </CCButton>
           </>
         )}
       </div>

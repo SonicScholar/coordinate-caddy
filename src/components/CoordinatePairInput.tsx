@@ -84,14 +84,12 @@ const CoordinatePairInput: React.FC<CoordinatePairInputProps> = ({
         </div>
       )}
       <div className="coordinatesInputButtons">
-        <CCButton
-          buttonContent={<Icon.XLg size={iconSize} />}
-          buttonPressed={handleCoordinatesUpdated}
-        />
-        <CCButton
-          buttonContent={<Icon.CheckLg size={iconSize} />}
-          buttonPressed={handleCoordinatesUpdated}
-        />
+        <CCButton buttonPressed={handleCoordinatesUpdated}>
+          <Icon.XLg size={iconSize} />
+        </CCButton>
+        <CCButton buttonPressed={handleCoordinatesUpdated}>
+          <Icon.CheckLg size={iconSize} />
+        </CCButton>
       </div>
     </div>
   );

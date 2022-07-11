@@ -1,23 +1,22 @@
 import React from "react";
 import "./CCButton.css";
 type CCButtonProps = {
-  buttonContent: any;
   enabled?: boolean;
   buttonPressed: (e: React.MouseEvent) => void;
   className?: string;
 };
 export const CCButton: React.FC<CCButtonProps> = ({
-  buttonContent: buttonText,
   enabled = true,
   buttonPressed,
   className = undefined,
-}: CCButtonProps) => {
+  children,
+}) => {
   let classNameText = "ccbutton" + (className ? ` ${className}` : "");
   if (!enabled) classNameText += " disabled";
 
   return (
     <div className={classNameText} onClick={buttonPressed}>
-      {buttonText}
+      {children}
     </div>
   );
 };
